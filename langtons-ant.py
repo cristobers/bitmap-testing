@@ -34,4 +34,4 @@ def langton(n):
             case 3:
                 x -= 1
 
-langton(11000)
+langton(200)

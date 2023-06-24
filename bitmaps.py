@@ -46,7 +46,7 @@ class BMP:
                 arr.extend(self.read_file()[i])
             self.pixel_data_offset = int.from_bytes(arr, "little")
         return self.pixel_data_offset
-
+i
     def rgb_to_bytearray(self, rgb: []) -> bytearray:
         ba = bytearray()
         for colour in rgb:
@@ -87,6 +87,8 @@ class BMP:
         return arr
 
     def draw_pixel(self, pos: tuple, rgb: []) -> None:
+        # reading and writing too many times to a file causes a permissions err
+        # the only chance to fix is to write to the file less frequently.
         if not self.tuple_check(pos):
             return
         rgb = self.rgb_to_bytearray(rgb)
@@ -97,4 +99,5 @@ class BMP:
         with open(self.file_name, "r+b") as f:
             f.seek(x)
             f.write(rgb)
+            f.close()
         self.file_contents = self.read_file() 
