@@ -46,7 +46,7 @@ class BMP:
                 arr.extend(self.read_file()[i])
             self.pixel_data_offset = int.from_bytes(arr, "little")
         return self.pixel_data_offset
-i
+
     def rgb_to_bytearray(self, rgb: []) -> bytearray:
         ba = bytearray()
         for colour in rgb:
